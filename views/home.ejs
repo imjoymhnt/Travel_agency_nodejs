@@ -1,5 +1,30 @@
 <%- include('partials/header') -%>
 
-<h1>Sumitra Travels</h1>
+<div class="contents pt-3">
+  <div class="container">
+    <div class="row">
+      <%cars.forEach((car) => {%>
+      <div
+        class="col-xs-12 col-sm-6 col-md-4 col-lg-4 d-flex justify-content-center mt-3"
+      >
+        <div class="card" style="width: 18rem">
+          <img
+            src="./uploads/images/<%= car.img %>"
+            class="card-img-top"
+            alt="<%= car.name %>"
+          />
+          <div class="card-body">
+            <h3 class="card-title"><%=car.name%></h3>
+            <h4 class="card-title">Color: <%=car.color%></h4>
+
+            <p class="card-text">Contact Person: <%=car.owner%></p>
+            <p>Contact Number: <span><%=car.phNumber%></span></p>
+          </div>
+        </div>
+      </div>
+      <%})%>
+    </div>
+  </div>
+</div>
 
 <%- include('partials/footer') -%>
