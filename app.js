@@ -20,12 +20,29 @@ const carSchema = new mongoose.Schema({
   color: String,
   owner: String,
   phNumber: Number,
+  img: String,
 });
 
 const Car = mongoose.model("Car", carSchema);
 
 app.get("/", (req, res) => {
   res.render("home");
+});
+
+app.get("/add", (req, res) => {
+  res.render("add", { title: "Add Cars" });
+});
+
+app.post("/add", (req, res) => {
+  const car = new Car({
+    name: req.body.title,
+    color: req.body.color,
+    owner: req.body.owner,
+    phNumber: req.body.phNumber,
+    img: req.body.image,
+  });
+
+  car.save();
 });
 
 app.listen(3000, () => {

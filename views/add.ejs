@@ -1,0 +1,59 @@
+<%- include('partials/header') -%>
+
+<div class="text-center">
+    <h1><%=title%></h1>
+</div>
+<hr>
+<div class="container">
+  <form action="/add" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Car Model</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        name="title"
+        autofocus
+      />
+    <div class="mb-3">
+        <label for="color" class="form-label">Car Color</label>
+      <input
+        type="text"
+        class="form-control"
+        id="color"
+        name="color"
+      />
+    </div>
+      <div class="mb-3">
+          <label for="owner" class="form-label">Contact Person</label>
+      <input
+        type="text"
+        class="form-control"
+        id="owner"
+        name="owner"
+      />
+      </div>
+        <div class="mb-3">
+            <label for="contact" class="form-label">Contact Number</label>
+      <input
+        type="text"
+        class="form-control"
+        id="contact"
+        name="phNumber"
+      />
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Car Image</label>
+      <input
+        type="file"
+        class="form-control"
+        id="image"
+        name="image"
+      />
+        </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<%- include('partials/footer') -%>
