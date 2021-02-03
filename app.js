@@ -86,7 +86,6 @@ app.get("/manage/delete", (req, res) => {
 
 // Handling the Post request for the add from
 app.post("/add", upload.single("image"), (req, res) => {
-  console.log(req);
   const car = new Car({
     name: req.body.title,
     color: req.body.color,
@@ -97,6 +96,18 @@ app.post("/add", upload.single("image"), (req, res) => {
 
   car.save();
   res.redirect("/add");
+});
+
+// Delete post request
+app.post("/manage/delete/confirm", (req, res) => {
+  const carId = req.body.id;
+  Car.findByIdAndRemove(carId, (err) => {
+    if (!err) {
+      res.redirect("/manage");
+    } else {
+      res.redirect("/manage");
+    }
+  });
 });
 
 // Listining to the 3000 port
