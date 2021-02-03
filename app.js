@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const { request } = require("express");
 
 // initialize app
 const app = express();
@@ -63,6 +64,24 @@ app.get("/", (req, res) => {
 // Create page get request
 app.get("/add", (req, res) => {
   res.render("add", { title: "Add Cars" });
+});
+
+// Manage page get request
+app.get("/manage", (req, res) => {
+  Car.find((err, foundCars) => {
+    if (err) {
+      res.redirect("/manage");
+    } else {
+      if (foundCars) {
+        res.render("manage", { title: "Manage cars", cars: foundCars });
+      }
+    }
+  });
+});
+
+// Manage delete get request
+app.get("/manage/delete", (req, res) => {
+  res.render("deleteCar");
 });
 
 // Handling the Post request for the add from
