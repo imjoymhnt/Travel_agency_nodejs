@@ -114,7 +114,7 @@ app.get("/manage/edit/:id", (req, res) => {
 
 // Handling the Post request for the add from
 app.post("/add", upload.single("image"), (req, res) => {
-  console.log(req.file);
+  // handle default Image
   let img;
   if (!req.file) {
     img = "default.jpg";
