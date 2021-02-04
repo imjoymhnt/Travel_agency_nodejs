@@ -4,7 +4,7 @@ const express = require("express");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const multer = require("multer");
-
+const Car = require("./models/carSchema");
 // initialize app
 const app = express();
 
@@ -37,33 +37,6 @@ mongoose.connect("mongodb://localhost:27017/travelsDB", {
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
-
-// Creating the mongodb Schema
-const carSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    default: "Tesla",
-  },
-  color: {
-    type: String,
-    default: "Blue",
-  },
-  owner: {
-    type: String,
-    default: "John Doe",
-  },
-  phNumber: {
-    type: Number,
-    default: "000",
-  },
-  img: {
-    type: String,
-    default: "default.jpg",
-  },
-});
-
-// Creating the model for the Schema
-const Car = mongoose.model("Car", carSchema);
 
 // Home page get request
 app.get("/", (req, res) => {
