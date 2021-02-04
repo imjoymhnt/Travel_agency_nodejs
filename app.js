@@ -1,16 +1,17 @@
 // Importing the requiring modules
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const multer = require("multer");
-const { request } = require("express");
 
 // initialize app
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(express.static("public"));
 
 // Multer configuration for image upload
@@ -34,15 +35,31 @@ const upload = multer({
 mongoose.connect("mongodb://localhost:27017/travelsDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 // Creating the mongodb Schema
 const carSchema = new mongoose.Schema({
-  name: String,
-  color: String,
-  owner: String,
-  phNumber: Number,
-  img: String,
+  name: {
+    type: String,
+    default: "Tesla",
+  },
+  color: {
+    type: String,
+    default: "Blue",
+  },
+  owner: {
+    type: String,
+    default: "John Doe",
+  },
+  phNumber: {
+    type: Number,
+    default: "000",
+  },
+  img: {
+    type: String,
+    default: "default.jpg",
+  },
 });
 
 // Creating the model for the Schema
@@ -84,14 +101,32 @@ app.get("/manage/delete", (req, res) => {
   res.render("deleteCar");
 });
 
+app.get("/manage/edit/:id", (req, res) => {
+  const id = req.params.id;
+  Car.findById(id, (err, foundCar) => {
+    if (!err) {
+      res.render("edit", { title: "Edit Car", foundCar: foundCar });
+    } else {
+      res.redirect("/manage");
+    }
+  });
+});
+
 // Handling the Post request for the add from
 app.post("/add", upload.single("image"), (req, res) => {
+  console.log(req.file);
+  let img;
+  if (!req.file) {
+    img = "default.jpg";
+  } else {
+    img = req.file.filename;
+  }
   const car = new Car({
     name: req.body.title,
     color: req.body.color,
     owner: req.body.owner,
     phNumber: req.body.phNumber,
-    img: req.file.filename,
+    img: img,
   });
 
   car.save();
@@ -104,6 +139,26 @@ app.post("/manage/delete/confirm", (req, res) => {
   Car.findByIdAndRemove(carId, (err) => {
     if (!err) {
       res.redirect("/manage");
+    } else {
+      res.redirect("/manage");
+    }
+  });
+});
+
+// Edit post request
+app.post("/manage/edit/:id", (req, res) => {
+  let car = {};
+  car.name = req.body.title;
+  car.color = req.body.color;
+  car.owner = req.body.owner;
+  car.phNumber = req.body.phNumber;
+
+  let query = { _id: req.params.id };
+  Car.updateOne(query, car, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect("/");
+      return;
     } else {
       res.redirect("/manage");
     }

@@ -17,7 +17,7 @@
       >
         <div class="card" style="width: 18rem">
           <img
-            src="./uploads/images/<%= car.img %>"
+            src="/uploads/images/<%= car.img %>"
             class="card-img-top"
             alt="<%= car.name %>"
             style="height: 260px; width: 286px"
@@ -29,10 +29,15 @@
             <p class="card-text">Contact Person: <%=car.owner%></p>
             <p>Contact Number: <span><%=car.phNumber%></span></p>
           </div>
-          <form action="/manage/delete/confirm" method="POST">
-            <input type="hidden" name="id" value="<%=car._id%>" />
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
+          <div class="d-flex flex-row justify-content-center">
+            <form action="/manage/delete/confirm" method="POST" class="m-2">
+              <input type="hidden" name="id" value="<%=car._id%>" />
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+            <a class="btn btn-dark m-2" href="/manage/edit/<%=car._id%>"
+              >Edit</a
+            >
+          </div>
         </div>
       </div>
       <%})%>
