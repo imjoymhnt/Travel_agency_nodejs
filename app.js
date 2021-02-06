@@ -5,6 +5,9 @@ const ejs = require("ejs");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const Car = require("./models/carSchema");
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 // initialize app
 const app = express();
 
@@ -31,12 +34,29 @@ const upload = multer({
   },
 });
 
+app.use(
+  session({
+    secret: "Our little secret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // connecting to the mongodb database
 mongoose.connect("mongodb://localhost:27017/travelsDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
+mongoose.set("useCreateIndex", true);
+
+const User = require("./models/authSchema");
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Home page get request
 app.get("/", (req, res) => {
@@ -56,19 +76,6 @@ app.get("/add", (req, res) => {
   res.render("add", { title: "Add Cars" });
 });
 
-// Manage page get request
-app.get("/manage", (req, res) => {
-  Car.find((err, foundCars) => {
-    if (err) {
-      res.redirect("/manage");
-    } else {
-      if (foundCars) {
-        res.render("manage", { title: "Manage cars", cars: foundCars });
-      }
-    }
-  });
-});
-
 // Manage delete get request
 app.get("/manage/delete", (req, res) => {
   res.render("deleteCar");
@@ -81,6 +88,69 @@ app.get("/manage/edit/:id", (req, res) => {
       res.render("edit", { title: "Edit Car", foundCar: foundCar });
     } else {
       res.redirect("/manage");
+    }
+  });
+});
+
+// app.get("/register", (req, res) => {
+//   res.render("register");
+// });
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Manage page get request
+app.get("/manage", (req, res) => {
+  if (req.isAuthenticated()) {
+    Car.find((err, foundCars) => {
+      if (err) {
+        res.redirect("/manage");
+      } else {
+        if (foundCars) {
+          res.render("manage", { title: "Manage cars", cars: foundCars });
+        }
+      }
+    });
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
+
+// app.post("/register", (req, res) => {
+//   User.register(
+//     { username: req.body.email },
+//     req.body.password,
+//     (err, user) => {
+//       if (err) {
+//         console.log(err);
+//         res.redirect("/register");
+//       } else {
+//         passport.authenticate("local")(req, res, function () {
+//           res.redirect("/manage");
+//         });
+//       }
+//     }
+//   );
+// });
+
+app.post("/login", (req, res) => {
+  const user = new User({
+    username: req.body.email,
+    password: req.body.password,
+  });
+  req.login(user, function (err) {
+    if (err) {
+      console.log(err);
+      res.redirect("/login");
+    } else {
+      passport.authenticate("local")(req, res, function () {
+        res.redirect("/manage");
+      });
     }
   });
 });

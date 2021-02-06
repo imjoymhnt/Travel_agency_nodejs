@@ -1,0 +1,41 @@
+<%- include('partials/admin-header') -%>
+
+<div class="container login img-fluid">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <br />
+      <h1 class="text-center"><Strong>Admin Panel</Strong></h1>
+      <hr />
+      <hr />
+      <form action="/register" method="POST">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="password"
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Signup</button>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+
+<%- include('partials/admin-header') -%>
