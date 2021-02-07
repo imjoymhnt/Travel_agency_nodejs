@@ -3,6 +3,17 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
+  background: #005aa7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #fffde4,
+    #005aa7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #fffde4,
+    #005aa7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 a {
@@ -23,7 +34,9 @@ header {
   width: 100%;
   height: 100vh;
   background: url("/images/hero4.jpg") no-repeat 50% 50%;
+  border-radius: 0 0 10px 10px;
   background-size: cover;
+  z-index: 1;
 }
 
 .hero-heading {
@@ -33,13 +46,23 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3rem;
+  position: absolute;
+  z-index: 2;
 }
 .diff {
   color: #00d84a;
   background-color: #000;
   opacity: 0.8;
 }
-
+.fa-facebook {
+  color: #4f75c7;
+}
+.fa-twitter {
+  color: #00acee;
+}
+.fa-instagram {
+  color: #ff6f91;
+}
 .content {
   width: 94%;
   margin: 4em auto;
@@ -47,7 +70,7 @@ header {
   line-height: 30px;
   text-align: justify;
 }
-
+/* 
 .contents {
   background: #005aa7; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -60,10 +83,26 @@ header {
     #fffde4,
     #005aa7
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
+} */
 
 .card-body {
   background-image: -webkit-linear-gradient(57deg, #8fbaee 50%, #e4e9fd 50%);
+}
+
+footer {
+  background: #005aa7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #fffde4,
+    #005aa7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #fffde4, #005aa7);
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #fff;
+  border-radius: 10px;
 }
 
 .jumbotron {
@@ -145,10 +184,20 @@ nav ul li a {
     margin-top: 16px;
   }
 
-  /* .hero-heading {
-    font-size: 2.2rem;
-    position
+  /* header {
+    position: as;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
   } */
+
+  .hero-heading {
+    font-size: 2.2rem;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+  }
 
   nav ul {
     max-height: 0px;
@@ -161,6 +210,9 @@ nav ul li a {
 
   .showing {
     max-height: 34em;
+    position: relative;
+
+    z-index: 3;
   }
 
   nav ul li {

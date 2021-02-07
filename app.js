@@ -76,6 +76,16 @@ app.get("/add", (req, res) => {
   res.render("add", { title: "Add Cars" });
 });
 
+// About get request
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+
+// Contact get request
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+
 // Manage delete get request
 app.get("/manage/delete", (req, res) => {
   res.render("deleteCar");
@@ -116,6 +126,7 @@ app.get("/manage", (req, res) => {
   }
 });
 
+// Logout get request
 app.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/");
