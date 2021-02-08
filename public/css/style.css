@@ -37,6 +37,7 @@ header {
   border-radius: 0 0 10px 10px;
   background-size: cover;
   z-index: 1;
+  background-position: center;
 }
 
 .hero-heading {
@@ -54,15 +55,20 @@ header {
   background-color: #000;
   opacity: 0.8;
 }
-.fa-facebook {
-  color: #4f75c7;
+
+.fa-facebook-f {
+  color: #2063f3;
+  padding: 3rem;
 }
 .fa-twitter {
   color: #00acee;
+  padding: 3rem;
 }
 .fa-instagram {
   color: #ff6f91;
+  padding: 3rem;
 }
+
 .content {
   width: 94%;
   margin: 4em auto;
@@ -70,39 +76,30 @@ header {
   line-height: 30px;
   text-align: justify;
 }
-/* 
-.contents {
-  background: #005aa7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #fffde4,
-    #005aa7
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #fffde4,
-    #005aa7
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-} */
 
 .card-body {
-  background-image: -webkit-linear-gradient(57deg, #8fbaee 50%, #e4e9fd 50%);
+  background-image: -webkit-linear-gradient(52deg, #8fbaee 50%, #e4e9fd 50%);
 }
 
-footer {
+/* footer {
   background: #005aa7; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
+/* background: -webkit-linear-gradient(
     to left,
     #fffde4,
     #005aa7
   ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #fffde4, #005aa7);
+/* background: linear-gradient(to left, #fffde4, #005aa7);
   padding: 10px;
   text-align: center;
   display: flex;
   justify-content: space-around;
   border-top: 1px solid #fff;
-  border-radius: 10px;
+  border-radius: 10px; */
+*/ */ .lets-btn {
+  background-color: transparent;
+}
+.lets-btn:hover {
+  background-color: #015a9d;
 }
 
 .jumbotron {
@@ -176,6 +173,12 @@ nav ul li a {
   color: #fff;
   display: none;
 }
+/* #logo {
+  opacity: 0.7;
+  border: 2px solid black;
+  border-radius: 15px;
+  height: 50px;
+} */
 
 @media (max-width: 786px) {
   .logo {
@@ -184,19 +187,30 @@ nav ul li a {
     margin-top: 16px;
   }
 
-  /* header {
-    position: as;
-    left: 0px;
-    top: 0px;
+  header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url("/images/hero4.jpg") no-repeat 50% 50%;
+    border-radius: 0 0 10px 10px;
+    background-size: cover;
     z-index: 1;
-  } */
+  }
 
   .hero-heading {
-    font-size: 2.2rem;
     position: absolute;
-    left: 0px;
-    top: 0px;
+    color: #fff;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    position: absolute;
     z-index: 2;
+  }
+  .diff {
+    color: #00d84a;
+    background-color: #000;
+    opacity: 0.8;
   }
 
   nav ul {
@@ -211,7 +225,7 @@ nav ul li a {
   .showing {
     max-height: 34em;
     position: relative;
-
+    line-height: 2px;
     z-index: 3;
   }
 
@@ -226,3 +240,20 @@ nav ul li a {
     display: block;
   }
 }
+
+/* animation */
+[data-scroll] {
+  transition: all 2s;
+}
+
+[data-scroll="in"] {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-scroll="out"] {
+  opacity: 0;
+  transform: translate(-200px);
+}
+
+/* new */

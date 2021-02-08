@@ -1,9 +1,12 @@
 <%- include('partials/header') -%>
-<div class="hero-heading">
+<div class="hero-heading animate__animated animate__fadeIn animate__delay-1s">
   <h1>
-    Create Your Own Way With <strong class="diff">Sumitra Travels.</strong>
+    Enjoy Your <strong class="diff">Affordable</strong> Journey With
+    <strong class="diff">Sumitra Travels.</strong>
   </h1>
-  <a href="#content" class="btn btn-secondary btn-lg">Let's Go</a>
+  <a href="#content" class="btn btn-primary btn-lg lets-btn"
+    >Lets Go <i class="fas fa-arrow-right"></i
+  ></a>
 </div>
 <section id="content">
   <div class="contents pt-3">
@@ -12,20 +15,33 @@
         <%cars.forEach((car) => {%>
         <div
           class="col-xs-12 col-sm-6 col-md-4 col-lg-4 d-flex justify-content-center mt-3 mb-3"
+          data-scroll
         >
           <div class="card" style="width: 18rem">
             <img
               src="./uploads/images/<%= car.img %>"
               class="card-img-top"
               alt="<%= car.name %>"
-              style="height: 260px; width: 286px"
+              style="max-width: 100%; height: 30vh; background-size: cover"
             />
             <div class="card-body">
               <h3 class="card-title"><%=car.name%></h3>
-              <h4 class="card-title">Color: <%=car.color%></h4>
-
-              <p class="card-text">Contact Person: <%=car.owner%></p>
-              <p>Contact Number: <span><%=car.phNumber%></span></p>
+              <h3 class="card-title">
+                <span style="text-decoration: underline">Seat</span>:
+                <%=car.seat%>
+              </h3>
+              <h4 class="card-title">
+                <span style="text-decoration: underline">Color</span>:
+                <%=car.color%>
+              </h4>
+              <p>
+                <span style="text-decoration: underline">Contact Person</span>:
+                <%=car.owner%>
+              </p>
+              <p>
+                <span style="text-decoration: underline">Contact Number</span>:
+                <span><%=car.phNumber%></span>
+              </p>
             </div>
           </div>
         </div>

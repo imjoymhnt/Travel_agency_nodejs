@@ -102,9 +102,9 @@ app.get("/manage/edit/:id", (req, res) => {
   });
 });
 
-// app.get("/register", (req, res) => {
-//   res.render("register");
-// });
+app.get("/register", (req, res) => {
+  res.render("register");
+});
 app.get("/login", (req, res) => {
   res.render("login");
 });
@@ -132,22 +132,22 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-// app.post("/register", (req, res) => {
-//   User.register(
-//     { username: req.body.email },
-//     req.body.password,
-//     (err, user) => {
-//       if (err) {
-//         console.log(err);
-//         res.redirect("/register");
-//       } else {
-//         passport.authenticate("local")(req, res, function () {
-//           res.redirect("/manage");
-//         });
-//       }
-//     }
-//   );
-// });
+app.post("/register", (req, res) => {
+  User.register(
+    { username: req.body.email },
+    req.body.password,
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        res.redirect("/register");
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          res.redirect("/manage");
+        });
+      }
+    }
+  );
+});
 
 app.post("/login", (req, res) => {
   const user = new User({

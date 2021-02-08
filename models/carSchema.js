@@ -6,6 +6,10 @@ const carSchema = new mongoose.Schema({
     type: String,
     default: "Tesla",
   },
+  seat: {
+    type: Number,
+    default: 4,
+  },
   color: {
     type: String,
     default: "Blue",
